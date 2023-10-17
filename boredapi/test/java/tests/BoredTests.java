@@ -5,7 +5,7 @@ import api.BoredController;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
 public class BoredTests
@@ -16,6 +16,6 @@ public class BoredTests
         BoredController controller = new BoredController();
         Activity activity = controller.getRandomActivity();
 
-        assertThat(activity.getActivity(), not(emptyString()));
+        assertThat(activity, not(equalTo(new Activity())));
     }
 }

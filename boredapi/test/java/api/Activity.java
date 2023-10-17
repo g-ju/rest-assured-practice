@@ -4,7 +4,7 @@ public class Activity
 {
     private String activity;
     private double accessibility;
-    private String type;
+    private Type type;
     private int participants;
     private double price;
     private String link;
@@ -30,12 +30,12 @@ public class Activity
         this.accessibility = accessibility;
     }
 
-    public String getType()
+    public Type getType()
     {
         return type;
     }
 
-    public void setType(String type)
+    public void setType(Type type)
     {
         this.type = type;
     }
@@ -78,5 +78,30 @@ public class Activity
     public void setKey(int key)
     {
         this.key = key;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        else if (obj == null || getClass() != obj.getClass())
+        {
+            return false;
+        }
+        else
+        {
+            Activity that = (Activity) obj;
+            return this.activity.equals(that.activity) &&
+                   this.accessibility == that.accessibility &&
+                   this.type == that.type &&
+                   this.participants == that.participants &&
+                   this.price == that.price &&
+                   this.link.equals(that.link) &&
+                   this.key == that.key;
+
+        }
     }
 }
