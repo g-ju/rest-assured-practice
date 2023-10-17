@@ -57,7 +57,42 @@ public class BoredController
                 .spec(requestSpecification)
                 .queryParam("price", price)
                 .get()
-                .then()
+               .then()
+                .extract()
+                .as(Activity.class);
+    }
+
+    public Activity getActivityWithinPriceRange(double minPrice, double maxPrice)
+    {
+        return given()
+                .spec(requestSpecification)
+                .queryParam("minprice", minPrice)
+                .queryParam("maxprice", maxPrice)
+                .get()
+               .then()
+                .extract()
+                .as(Activity.class);
+    }
+
+    public Activity getActivityWithAccessibility(double accessibility)
+    {
+        return given()
+                .spec(requestSpecification)
+                .queryParam("accessibility", accessibility)
+                .get()
+               .then()
+                .extract()
+                .as(Activity.class);
+    }
+
+    public Activity getActivityWithinAccessibilityRange(double minAccessibility, double maxAccessibility)
+    {
+        return given()
+                .spec(requestSpecification)
+                .queryParam("minaccessibility", minAccessibility)
+                .queryParam("maxaccessibility", maxAccessibility)
+                .get()
+               .then()
                 .extract()
                 .as(Activity.class);
     }

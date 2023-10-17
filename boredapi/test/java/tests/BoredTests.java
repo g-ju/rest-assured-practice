@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BoredTests
 {
@@ -50,5 +51,37 @@ public class BoredTests
         Activity activity = controller.getActivityByPrice(price);
 
         assertThat(activity.getPrice(), is(price));
+    }
+
+    @Test
+    void get_activity_within_price_range_returns_activity_with_price_in_range()
+    {
+        BoredController controller = new BoredController();
+        double minPrice = 0.5;
+        double maxPrice = 0.8;
+        Activity activity = controller.getActivityWithinPriceRange(minPrice, maxPrice);
+
+        assertTrue(activity.getPrice() >= minPrice && activity.getPrice() <= maxPrice);
+    }
+
+    @Test
+    void get_activity_by_accessibility_returns_activity_with_correct_accessibility()
+    {
+        BoredController controller = new BoredController();
+        double accessibility = 0.5;
+        Activity activity = controller.getActivityWithAccessibility(accessibility);
+
+        assertThat(activity.getAccessibility(), is(accessibility));
+    }
+
+    @Test
+    void get_activity_within_accessibility_range_returns_activity_with_accessibility_in_range()
+    {
+        BoredController controller = new BoredController();
+        double minAccessibility = 0.4;
+        double maxAccessibility = 0.9;
+        Activity activity = controller.getActivityWithinAccessibilityRange(minAccessibility, maxAccessibility);
+
+        assertTrue(activity.getAccessibility() >= minAccessibility && activity.getAccessibility() <= maxAccessibility);
     }
 }
