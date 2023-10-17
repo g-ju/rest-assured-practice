@@ -2,11 +2,14 @@ package tests;
 
 import api.Activity;
 import api.BoredController;
+import api.Type;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BoredTests
 {
@@ -17,5 +20,35 @@ public class BoredTests
         Activity activity = controller.getRandomActivity();
 
         assertThat(activity, not(equalTo(new Activity())));
+    }
+
+    @Test
+    void get_activity_by_key_returns_the_same_activity()
+    {
+        BoredController controller = new BoredController();
+        Activity randomActivity = controller.getRandomActivity();
+
+        Activity keyedActivity = controller.getActivityByKey(randomActivity.getKey());
+        assertEquals(randomActivity, keyedActivity);
+    }
+
+    @ParameterizedTest
+    @EnumSource(Type.class)
+    void get_activity_by_type_returns_activity_with_correct_type(Type type)
+    {
+        BoredController controller = new BoredController();
+        Activity activity = controller.getActivityByType(type);
+
+        assertThat(activity.getType(), is(type));
+    }
+
+    @Test
+    void get_activity_by_price_returns_activity_with_correct_price()
+    {
+        BoredController controller = new BoredController();
+        double price = 0.5;
+        Activity activity = controller.getActivityByPrice(price);
+
+        assertThat(activity.getPrice(), is(price));
     }
 }
