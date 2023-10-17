@@ -8,6 +8,7 @@ public class Activity
     private int participants;
     private double price;
     private String link;
+    private int key;
 
     public String getActivity()
     {
@@ -78,6 +79,4 @@ public class Activity
     {
         this.key = key;
     }
-
-    private int key;
 }
